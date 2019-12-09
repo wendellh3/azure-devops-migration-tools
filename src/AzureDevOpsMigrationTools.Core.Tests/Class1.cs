@@ -1,18 +1,17 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AzureDevOpsMigrationTools.Core;
-using Microsoft.VisualStudio.Services.WebApi;
-using System;
-using Microsoft.VisualStudio.Services.Client;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
-using System.Linq;
 using Microsoft.VisualStudio.Services.Common;
+using Microsoft.VisualStudio.Services.WebApi;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 
 namespace AzureDevOpsMigrationTools.Core.Tests
 {
-    [TestClass]
-    public class TestConnectAzureDevOps
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+    public class MyTestClass
     {
+
         [TestMethod]
         public void TestConnect()
         {
@@ -27,14 +26,16 @@ namespace AzureDevOpsMigrationTools.Core.Tests
             WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
 
             Wiql query = new Wiql() { Query = "SELECT [Id], [Title], [State] FROM workitems" };
-          
+
             WorkItemQueryResult queryResults = witClient.QueryByWiqlAsync(query).Result;
 
-   
+       
+
 
             Assert.IsNotNull(queryResults);
             Assert.AreNotEqual(0, queryResults.WorkItems.Count());
 
         }
+
     }
 }
