@@ -1,4 +1,4 @@
-﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
@@ -29,7 +29,7 @@ namespace AzureDevOpsMigrationTools.Core.Tests
 
             WorkItemQueryResult queryResults = witClient.QueryByWiqlAsync(query).Result;
 
-       
+
 
 
             Assert.IsNotNull(queryResults);
