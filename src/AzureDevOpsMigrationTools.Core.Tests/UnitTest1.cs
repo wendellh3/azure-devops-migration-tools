@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using AzureDevOpsMigrationTools.Core;
 
 namespace AzureDevOpsMigrationTools.Core.Tests
 {
@@ -15,21 +16,14 @@ namespace AzureDevOpsMigrationTools.Core.Tests
         [TestMethod]
         public void TestConnect()
         {
-            Uri orgUrl = new Uri("https://dev.azure.com/nkdagility-preview");
+            Uri organisationUrl = new Uri("https://dev.azure.com/nkdagility-preview");
+            string projectName = "TestProject1";
             //Prompt user for credential
             string personalAccessToken = "msiqtdbl3yh7pscriirylkd7rahq36lvqu5gg554buv5pddtmhpq"; // Token is public and only has access to work items in one specific test account.
-            // Create a connection
-            VssCredentials credentials = new VssBasicCredential("", personalAccessToken);
-            VssConnection connection = new VssConnection(orgUrl, credentials);
 
-            //create http client and query for resutls
-            WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+            IAzureDevOpsSource azureDevOpsSource = new AzureDevOpsSource(organisationUrl, personalAccessToken, projectName);
 
-            Wiql query = new Wiql() { Query = "SELECT [Id], [Title], [State] FROM workitems" };
-
-            WorkItemQueryResult queryResults = witClient.QueryByWiqlAsync(query).Result;
-
-
+          WorkItemQueryResult  queryResults = azureDevOpsSource.GetWorkItemsByQuery("");
 
 
             Assert.IsNotNull(queryResults);

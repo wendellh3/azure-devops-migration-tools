@@ -5,8 +5,8 @@ using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 
 namespace AzureDevOpsMigrationTools.Core
 {
-    interface IAzureDevOpsSource
+    public interface IAzureDevOpsSource
     {
-        List<WorkItem> GetWorkItems();
+       public WorkItemQueryResult GetWorkItemsByQuery(string queryBit);
     }
 }
