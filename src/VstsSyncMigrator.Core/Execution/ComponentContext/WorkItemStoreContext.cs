@@ -80,6 +80,8 @@ namespace VstsSyncMigrator.Engine
             {
                 return foundWis[workItemToFind.Id];
             }
+
+            //this may be a problem as well.
             if (workItemToFind.Fields.Contains(teamProjectContext.Config.ReflectedWorkItemIDFieldName) && !string.IsNullOrEmpty( workItemToFind.Fields[teamProjectContext.Config.ReflectedWorkItemIDFieldName]?.Value?.ToString()))
             {
                 string rwiid = workItemToFind.Fields[teamProjectContext.Config.ReflectedWorkItemIDFieldName].Value.ToString();
@@ -104,12 +106,13 @@ namespace VstsSyncMigrator.Engine
                     }
                 }                
             }
-            if (found == null) { found = FindReflectedWorkItemByReflectedWorkItemId(ReflectedWorkItemId); }
-            if (!workItemToFind.Fields.Contains(teamProjectContext.Config.ReflectedWorkItemIDFieldName))
+            if (found == null) { found = FindReflectedWorkItemByReflectedWorkItemId(ReflectedWorkItemId); } //this is ok, querying AzDO for Custom.ReflectedWorkItemId for a value, not found is OK
+            /* Original code modification
+            if (!workItemToFind.Fields.Contains(teamProjectContext.Config.ReflectedWorkItemIDFieldName)) // this is always false, TFS field will not be Custom.ReflectedWorkItemId - should be TfsMigrationTool.ReflectedWorkItemId
             {
                 if (found == null) { found = FindReflectedWorkItemByMigrationRef(ReflectedWorkItemId); } // Too slow!
                 //if (found == null) { found = FindReflectedWorkItemByTitle(workItemToFind.Title); }
-            }
+            }*/
             if (found != null && cache) 
             {
                 foundWis.Add(workItemToFind.Id, found); /// TODO MEMORY LEAK
