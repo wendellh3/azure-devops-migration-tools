@@ -108,6 +108,7 @@ namespace VstsSyncMigrator.Engine
             }
             if (found == null) { found = FindReflectedWorkItemByReflectedWorkItemId(ReflectedWorkItemId); } //this is ok, querying AzDO for Custom.ReflectedWorkItemId for a value, not found is OK
             /* Original code modification
+             # TODO this is querying the AzDO work item with the TFS ReflectedWorkItemId field ref - will always be false.
             if (!workItemToFind.Fields.Contains(teamProjectContext.Config.ReflectedWorkItemIDFieldName)) // this is always false, TFS field will not be Custom.ReflectedWorkItemId - should be TfsMigrationTool.ReflectedWorkItemId
             {
                 if (found == null) { found = FindReflectedWorkItemByMigrationRef(ReflectedWorkItemId); } // Too slow!
