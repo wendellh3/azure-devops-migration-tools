@@ -57,6 +57,8 @@ namespace VstsSyncMigrator.Engine
                         {"MigrationContextTime", executeTimer.ElapsedMilliseconds}
                     });
                 Trace.TraceWarning($"  [EXCEPTION] {ex}");
+                // 2020-03-18 Modification to rethrow the exception so that the program terminates in a way the caller can react to.
+                throw ex;
             }
             finally
             {
