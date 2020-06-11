@@ -729,12 +729,7 @@ namespace VstsSyncMigrator.Engine
                 throw new Exception("Running a replay migration requires a ReflectedWorkItemId field to be defined in the target project's process.");
             }
         }
-
-
-
     }
-
-
 
     public class NodeDetecomatic
     {
@@ -768,7 +763,5 @@ namespace VstsSyncMigrator.Engine
             }
             return true;
         }
-
-
     }
 }
